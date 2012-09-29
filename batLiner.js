@@ -36,7 +36,7 @@ var components = {
 }
 
 // define palette
-var palette = new Palette('batLine v0.0.2', components, params);
+var palette = new Palette('batLiner v0.0.2', components, params);
 
 function batLine(){
 

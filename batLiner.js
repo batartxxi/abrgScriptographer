@@ -24,7 +24,6 @@ var params = {
 	ko: true
 }
 
-
 // define the first object selected in doc
 var original = document.selectedItems.first;
 
@@ -35,12 +34,12 @@ shadow1 = CompoundPath([shadow1]);
 var shadow2 = shadow1.clone();
 
 // move shadow
-shadow2.position += new Point(params.x,params.y);
+shadow2.position += new Point(params.x, params.y);
 
 // intersect
 var shadow = Pathfinder.backMinusFront([shadow1, shadow2]);
 
 // delete original
-if (params.ko === true){
+if (params.ko === true) {
 	original.remove();
 }

@@ -9,7 +9,8 @@
 /\\       /\\     /\\/\\         /\\/\\      /\\     /\\        /\\\\     /\\       /\\
 
 
-phantom by adrien revel for ABRèGe v0.0.2
+phantom by adrien revel for ABRèGe + Kidnap Your Designer = cinq sur cinq v0.0.2
+pan pan pan c'est la panacée
 last update: 121004
 
 http://www.abrege.net/

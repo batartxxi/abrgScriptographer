@@ -88,7 +88,7 @@ var phantomBot = Pathfinder.backMinusFront([panaTextPhantom2, maskTop]);
 for(i=0;i<panaTextVector.children.length;i++){
 	
 	// random scale Y
-	panaTextVector.children[i].scale(1, Math.random())
+	panaTextVector.children[i].scale(1, Math.random(0.5,1))
 	// shear on X	
 	panaTextVector.children[i].shear(-0.5,0)
 }

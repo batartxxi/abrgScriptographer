@@ -70,7 +70,6 @@ panaText.content = params.textInput
 var nbText = panaText.range.length
 console.log(nbText)
 
-
 // sets the capitalization to all caps
 panaText.characterStyle.capitalization = 'all';
 

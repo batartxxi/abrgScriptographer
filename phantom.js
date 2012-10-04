@@ -9,9 +9,9 @@
 /\\       /\\     /\\/\\         /\\/\\      /\\     /\\        /\\\\     /\\       /\\
 
 
-phantom v0.0.2 by adrien revel for ABRèGe + Kidnap Your Designer = cinq sur cinq
+phantom v0.0.3 by adrien revel for ABRèGe + Kidnap Your Designer = cinq sur cinq
 pan pan pan c'est la panacée
-last update: 121004
+last update: 121005
 
 http://www.abrege.net/
 
@@ -20,16 +20,42 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-
 
 */
 
-// First we define a dialog component
+// params
+var params = {
+	version:'0.0.3',
+	textInput:'pan pan pan',
+	randomMin:0.5,
+	randomMax:1,	
+	scale: true,
+	shear:true
+}
+// usefull
+function getRandomArbitary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+
+// define palette components
 var components = {
-	textInput: { type: 'string', label: 'panaText: ' }
+	textInput: { type: 'string', label: 'panaText: '},
+	ruler: {type: 'ruler'},
+	randomMin: {type: 'number', label: 'Scale min', range: [0,1]},
+	randomMax: {type: 'number', label: 'Scale max', range: [0,1]},
+	ruler1: {type: 'ruler'},
+	scale: {type: 'boolean', label: 'Scale'},
+	shear: {type: 'boolean', label: 'Shear'},
+	ruler2: {type: 'ruler'},
+	run: {type: 'button', value: 'transform it!', onClick: function(){
+		panaPhantom();
+	}}
+	
 };
 
+
 // Now we bring up the dialog
-var values = Dialog.prompt('Enter your text', components);
+var palette = new Palette('phantom v'+params.version, components, params);
 
-if (values) {
-
+function panaPhantom(){
 // Place text
 var panaText = new PointText(new Point(0, 0))
 
@@ -38,7 +64,7 @@ panaText.characterStyle.font = app.fonts['Decima Mono']['Bold']
 panaText.characterStyle.fontSize = 72;
 
 // Assign a string
-panaText.content = values.textInput
+panaText.content = params.textInput
 
 // Count characters
 var nbText = panaText.range.length
@@ -72,9 +98,9 @@ panaTextPhantom1.moveBelow(panaTextVector);
 panaTextPhantom2.moveBelow(panaTextVector);
 
 // Create the masks
-var maskBotRect = new Rectangle(new Point(-10, 10), new Point(840, -25.202));
+var maskBotRect = new Rectangle(new Point(-10, 10), new Point(5000, -25.202));
 var maskBot = new Path.Rectangle(maskBotRect);
-var maskTopRect = new Rectangle(new Point(-10, -25.202), new Point(840, -60.404));
+var maskTopRect = new Rectangle(new Point(-10, -25.202), new Point(5000, -60.404));
 var maskTop = new Path.Rectangle(maskTopRect);
 
 // Cut the phantoms
@@ -88,9 +114,14 @@ var phantomBot = Pathfinder.backMinusFront([panaTextPhantom2, maskTop]);
 for(i=0;i<panaTextVector.children.length;i++){
 	
 	// random scale Y
-	panaTextVector.children[i].scale(1, Math.random(0.5,1))
-	// shear on X	
-	panaTextVector.children[i].shear(-0.5,0)
+	
+	if (params.scale===true){
+		panaTextVector.children[i].scale(1, getRandomArbitary (params.randomMin, params.randomMax))
+	}
+	// shear on X
+	if (params.shear===true){
+		panaTextVector.children[i].shear(-0.5,0)
+	}
 }
 
 // Move the phantom top to front

@@ -9,7 +9,7 @@
 /\\       /\\     /\\/\\         /\\/\\      /\\     /\\        /\\\\     /\\       /\\
 
 
-phantom by adrien revel for ABRèGe + Kidnap Your Designer = cinq sur cinq v0.0.2
+phantom v0.0.2 by adrien revel for ABRèGe + Kidnap Your Designer = cinq sur cinq
 pan pan pan c'est la panacée
 last update: 121004
 
@@ -67,10 +67,9 @@ panaTextPhantom2.fillColor = new CMYKColor(0, 0, 0, 0);
 panaTextPhantom2.strokeColor = new CMYKColor(0, 0, 0, 1);
 panaTextPhantom2.strokeWidth = 1;
 
-// Move the phantom back
+// Move the phantom back and front
 panaTextPhantom1.moveBelow(panaTextVector);
 panaTextPhantom2.moveBelow(panaTextVector);
-
 
 // Create the masks
 var maskBotRect = new Rectangle(new Point(-10, 10), new Point(840, -25.202));
@@ -85,8 +84,17 @@ var phantomTop = Pathfinder.backMinusFront([panaTextPhantom1, maskBot]);
 var phantomBot = Pathfinder.backMinusFront([panaTextPhantom2, maskTop]);
 
 
+// make the letters dance !
+for(i=0;i<panaTextVector.children.length;i++){
+	
+	// random scale Y
+	panaTextVector.children[i].scale(1, Math.random())
+	// shear on X	
+	panaTextVector.children[i].shear(-0.5,0)
+}
 
-
+// Move the phantom top to front
+phantomTop.moveAbove(panaTextVector);
 
 }
 

@@ -9,8 +9,8 @@
 /\\       /\\     /\\/\\         /\\/\\      /\\     /\\        /\\\\     /\\       /\\
 
 
-phantom by adrien revel for ABRèGe v0.0.1
-last update: 120929
+phantom by adrien revel for ABRèGe v0.0.2
+last update: 121004
 
 http://www.abrege.net/
 
@@ -54,15 +54,38 @@ panaTextVector = panaText.createOutline()
 panaText.remove()
 
 // Create the phantom
-panaTextPhantom = panaTextVector.clone()
-panaTextPhantom.fillColor = new CMYKColor(0, 0, 0, 0);
-panaTextPhantom.strokeColor = new CMYKColor(0, 0, 0, 1);
-panaTextPhantom.strokeWidth = 1;
+panaTextPhantom1 = CompoundPath([panaTextVector.clone()]);
+panaTextPhantom2 = panaTextPhantom1.clone()
+
+// Style the phantom
+panaTextPhantom1.fillColor = new CMYKColor(0, 0, 0, 0);
+panaTextPhantom1.strokeColor = new CMYKColor(0, 0, 0, 1);
+panaTextPhantom1.strokeWidth = 1;
+
+panaTextPhantom2.fillColor = new CMYKColor(0, 0, 0, 0);
+panaTextPhantom2.strokeColor = new CMYKColor(0, 0, 0, 1);
+panaTextPhantom2.strokeWidth = 1;
 
 // Move the phantom back
-panaTextPhantom.moveBelow(panaTextVector);
+panaTextPhantom1.moveBelow(panaTextVector);
+panaTextPhantom2.moveBelow(panaTextVector);
 
-// Cut the phantom
+
+// Create the masks
+var maskBotRect = new Rectangle(new Point(-10, 10), new Point(840, -25.202));
+var maskBot = new Path.Rectangle(maskBotRect);
+var maskTopRect = new Rectangle(new Point(-10, -25.202), new Point(840, -60.404));
+var maskTop = new Path.Rectangle(maskTopRect);
+
+// Cut the phantoms
+
+// intersect
+var phantomTop = Pathfinder.backMinusFront([panaTextPhantom1, maskBot]);
+var phantomBot = Pathfinder.backMinusFront([panaTextPhantom2, maskTop]);
+
+
+
+
 
 }
 
